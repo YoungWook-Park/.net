@@ -1,28 +1,83 @@
 # Refact_PLC_DAQ
 
-PLC DAQ application built with .NET 8, WPF, and Entity Framework Core.
+Personal toy project: PLC-oriented DAQ pipeline in **.NET 8**, **WPF (MVVM)**, **EF Core**, with a **Test Driver** that exercises `HandleOp100Async` against a real SQL Server database.
 
-## Structure
+**Repository:** [github.com/YoungWook-Park/.net](https://github.com/YoungWook-Park/.net)
 
-- **Refact.PLC.DAQ.Domain** – Domain models, DTOs, parsers, PLC definitions
-- **Refact.PLC.DAQ.Infrastructure** – DB, PLC implementations, handlers, orchestration
-- **Refact.PLC.DAQ.Wpf** – WPF UI (MVVM)
-- **Refact.PLC.DAQ.WpfCommon** – MVVM base classes (NotifyPropertyChangedBase, RelayCommand, etc.)
-- **Refact.PLC.DAQ.Tests** – Unit tests
+---
+
+## Snapshot (what exists today)
+
+| Area | Notes |
+|------|--------|
+| Solution | `Refact_PLC_DAQ.sln` |
+| Namespaces | `Refact.PLC.DAQ.*` |
+| PLC (dev) | `FakePlcDevice` implements `IPlcDevice` |
+| UI | MVVM: `MainWindow` + `TestDriverWindow`, ViewModels co-located with views |
+| Orchestration | `DaqOrchestrator` exists but is **not** started from the WPF host yet |
+
+---
+
+## Project structure
+
+- **Refact.PLC.DAQ.Domain** – DTOs, parsers, PLC read/write definitions (`PlcWriteBuffer`, R12001–R12005 blocks)
+- **Refact.PLC.DAQ.Infrastructure** – EF Core, repositories, `ProcessDataHandler`, `FakePlcDevice`, `DaqOrchestrator`
+- **Refact.PLC.DAQ.Wpf** – WPF shell, Test Driver window, `IOpenWindowService`
+- **Refact.PLC.DAQ.WpfCommon** – `NotifyPropertyChangedBase`, `RelayCommand`, `AsyncRelayCommand`, `DelegateCommand`
+- **Refact.PLC.DAQ.Tests** – Unit/integration tests
+
+---
 
 ## Requirements
 
 - .NET 8
-- SQL Server (connection string in `appsettings.json`)
 - Windows (WPF)
+- SQL Server — connection string in `Refact.PLC.DAQ.Wpf/appsettings.json`
 
-## Build & Run
+---
+
+## Build & run
 
 ```bash
 dotnet build Refact_PLC_DAQ.sln
 dotnet run --project Refact.PLC.DAQ.Wpf
 ```
 
-## Test Driver
+Run tests:
 
-The WPF app includes a Test Driver that simulates PLC data and runs the HandleOp100Async pipeline against a real database.
+```bash
+dotnet test Refact_PLC_DAQ.sln
+```
+
+---
+
+## Documentation (`docs/`)
+
+| File | Purpose |
+|------|---------|
+| [docs/WpfImplementation.md](docs/WpfImplementation.md) | Index of coding guides |
+| [docs/WpfMvvmGuide.md](docs/WpfMvvmGuide.md) | MVVM, commands, View–ViewModel pairing |
+| [docs/ConSightAIRules.md](docs/ConSightAIRules.md) | AI assistant conventions (optional) |
+| [docs/CSharpSharedRules.md](docs/CSharpSharedRules.md) | Domain/Infrastructure C# rules |
+
+Use these for **blog posts** or onboarding; keep them in sync when patterns change.
+
+---
+
+## Roadmap (ideas)
+
+- [ ] Wire `DaqOrchestrator.RunAsync` from the app (background service / hosted loop)
+- [ ] Replace or complement `FakePlcDevice` with **TCP** (or other) simulator ↔ host process
+- [ ] Real PLC `IPlcDevice` implementation when hardware is available
+- [ ] OP200/210/220/230 orchestration triggers (beyond OP100 Test Driver)
+
+See [CHANGELOG.md](CHANGELOG.md) for version tags.
+
+---
+
+## Blog post outline (suggested)
+
+1. **Refactor & structure** — rename to `Refact.PLC.DAQ`, layers, MVVM, GitHub push  
+2. **Inter-process PLC simulation** — TCP (or gRPC) test app + `IPlcDevice` (future)
+
+Tag releases in Git when you publish a post (e.g. `v0.1-docs`, `v0.2-tcp`).

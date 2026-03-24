@@ -1,0 +1,32 @@
+# Build
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# User-specific
+appsettings.Development.json
+appsettings.Local.json
+*.Development.json
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini

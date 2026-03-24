@@ -1,0 +1,16 @@
+<Window x:Class="Refact.PLC.DAQ.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Refact.PLC.DAQ.Wpf"
+        mc:Ignorable="d"
+        Title="Refact.PLC.DAQ" Height="450" Width="800">
+    <Grid Margin="16">
+        <StackPanel>
+            <TextBlock Text="DAQ Test" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12"/>
+            <Button Content="Open Test Driver (Backup_Start DB)" 
+                    Command="{Binding OpenTestDriverCommand}" Width="320" Height="32" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </Grid>
+</Window>

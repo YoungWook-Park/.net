@@ -60,7 +60,6 @@ dotnet test Refact_PLC_DAQ.sln
 | [docs/ConSightAIRules.md](docs/ConSightAIRules.md) | AI assistant conventions (optional) |
 | [docs/CSharpSharedRules.md](docs/CSharpSharedRules.md) | Domain/Infrastructure C# rules |
 
-Use these for **blog posts** or onboarding; keep them in sync when patterns change.
 
 ---
 

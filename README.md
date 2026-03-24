@@ -72,11 +72,3 @@ dotnet test Refact_PLC_DAQ.sln
 
 See [CHANGELOG.md](CHANGELOG.md) for version tags.
 
----
-
-## Blog post outline (suggested)
-
-1. **Refactor & structure** — rename to `Refact.PLC.DAQ`, layers, MVVM, GitHub push  
-2. **Inter-process PLC simulation** — TCP (or gRPC) test app + `IPlcDevice` (future)
-
-Tag releases in Git when you publish a post (e.g. `v0.1-docs`, `v0.2-tcp`).
